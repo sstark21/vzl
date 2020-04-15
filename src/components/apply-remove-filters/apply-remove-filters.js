@@ -10,14 +10,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ApplyRemoveFilters = ({ checkUpdate }) => {
+const ApplyRemoveFilters = ({ applyFilter, removeAllFilters }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Button variant="outlined" onClick={() => checkUpdate()}>
+      <Button variant="outlined" onClick={() => applyFilter()}>
         Применить фильтры
       </Button>
-      <Button variant="outlined">Отключить все фильтры</Button>
+      <Button variant="outlined" onClick={() => removeAllFilters()}>
+        Отключить все фильтры
+      </Button>
     </div>
   );
 };

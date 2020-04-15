@@ -42,11 +42,13 @@ const useStyles = makeStyles((theme) => ({
 const PeriodType = ({ element, onToggle }) => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const classes = useStyles();
+  const switchId = element.name + "Switch";
   return (
     <FormGroup row>
       <form className={classes.date} noValidate autoComplete="off">
         <div>
           <Switch
+            id={switchId}
             name="checkedB"
             color="primary"
             size="small"
@@ -88,7 +90,7 @@ const PeriodType = ({ element, onToggle }) => {
   );
 };
 
-const CheckboxOnlyType = ({ element }) => {
+const CheckboxOnlyType = ({ element, onToggle }) => {
   const classes = useStyles();
   return (
     <FormGroup row>
@@ -98,7 +100,13 @@ const CheckboxOnlyType = ({ element }) => {
             name="checkedA"
             color="primary"
             size="small"
-            onClick={() => console.log("switch")}
+            onClick={() => onToggle(element.name)}
+            checked={element.checked}
+            disabled={
+              element.name == "newForThePeriod" ||
+              element.name == "changeForThePeriodOrganization" ||
+              element.name == "changeForThePeriodParticipation"
+            }
           />
           <TextField
             inputProps={{ style: { fontSize: 12 } }}
@@ -147,6 +155,7 @@ const SelectType = ({ element }) => {
               value={choice}
               onChange={handleChange}
               label={element.title}
+              disabled
             >
               <MenuItem value={10}>{element.variants[0].title}</MenuItem>
               <MenuItem value={15}>{element.variants[1].title}</MenuItem>
@@ -158,11 +167,7 @@ const SelectType = ({ element }) => {
   );
 };
 
-const InputTextType = ({
-  element,
-  onToggle,
-  onChangeContent,
-}) => {
+const InputTextType = ({ element, onToggle, onChangeContent }) => {
   const classes = useStyles();
   return (
     <FormGroup row>
@@ -172,7 +177,10 @@ const InputTextType = ({
             name="checkedB"
             color="primary"
             size="small"
-            onClick={() => onToggle(element.name)}
+            onClick={() => {
+              onToggle(element.name);
+            }}
+            checked={element.checked}
           />
           <TextField
             inputProps={{ style: { fontSize: 12 } }}

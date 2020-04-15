@@ -13,7 +13,7 @@ export default class MainFilter extends Component {
         contenierField: "",
       },
       {
-        name: "organizationId",
+        name: "idOrganization",
         title: "Идентификатора Организации",
         checked: false,
         contenierField: "",
@@ -49,7 +49,7 @@ export default class MainFilter extends Component {
         contenierField: "",
       },
       {
-        name: "countryOfRegistration",
+        name: "registrationCountry",
         title: "Страна регистрации",
         checked: false,
         contenierField: "",
@@ -99,11 +99,18 @@ export default class MainFilter extends Component {
         ),
       };
     });
-
   };
 
-  componentDidUpdate(prevState) {
-    if (prevState !== this.state.mainParameters) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.disableSwitch !== this.props.disableSwitch) {
+      console.log("test for disabled switch", this.props.disableSwitch);
+      let disablSwitchState = this.state.mainParameters.slice();
+      disablSwitchState.map((el) => {
+        el.checked = false;
+      });
+      this.setState({ mainParameters: disablSwitchState });
+    }
+    if (prevState.mainParameters !== this.state.mainParameters) {
       this.props.updateMainFilter(this.state.mainParameters);
     }
   }
@@ -114,7 +121,6 @@ export default class MainFilter extends Component {
         parameters={this.state.mainParameters}
         onToggle={this.onToggleCheckbox}
         onChangeContent={this.onChangeContentField}
-        updateMainFilter={this.props.updateMainFilter}
       />
     );
   }

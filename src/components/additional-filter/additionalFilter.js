@@ -99,6 +99,36 @@ export default class AdditionalFilter extends Component {
       };
     });
   };
+
+  componentDidMount() {
+    console.log("COMPONENT DID MOUN ADDITIONAL PARAMETRS");
+    const { additionalParameters } = this.state;
+    console.log("TEST DIDMOUNT STATE", additionalParameters[0]);
+    if (additionalParameters[0].checked) {
+      console.log("!!!!");
+      let copyAdditionalParameters = additionalParameters.slice();
+      for (let i = 1; i <= 3; i++) {
+        copyAdditionalParameters[i].disabled = false;
+      }
+      console.log("TEST DISABLED SWITCH", copyAdditionalParameters);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { additionalParameters } = this.state;
+    if (prevProps.disableSwitch !== this.props.disableSwitch) {
+      console.log("test for disabled switch", this.props.disableSwitch);
+      let disablSwitchState = additionalParameters.slice();
+      disablSwitchState.map((el) => {
+        el.checked = false;
+      });
+      this.setState({ additionalParameters: disablSwitchState });
+    }
+    if (prevState.additionalParameters !== additionalParameters) {
+      //   this.props.updateMainFilter(this.state.mainParameters);
+    }
+  }
+
   render() {
     return (
       <CreateFilters
