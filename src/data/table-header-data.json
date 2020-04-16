@@ -1,0 +1,203 @@
+[
+  {
+    "name": "f_001",
+    "position": 1,
+    "label": "Отчетная дата",
+    "dataType": "D",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_002",
+    "position": 2,
+    "label": "ЛИД",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_003",
+    "position": 3,
+    "label": "Ид. орг-ции",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_004",
+    "position": 4,
+    "label": "Краткое наименование организации",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_005",
+    "position": 5,
+    "label": "Полное наименование организации",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_006",
+    "position": 6,
+    "label": "ИНН",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_007",
+    "position": 7,
+    "label": "ОГРН",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_008",
+    "position": 8,
+    "label": "КПП",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_009",
+    "position": 9,
+    "label": "Страна регистрации",
+    "dataType": "V",
+    "values": [
+      " ДОМИНИКАНСКАЯ РЕСПУБЛИКА",
+      "АБХАЗИЯ",
+      "АВСТРАЛИЯ",
+      "АВСТРИЯ",
+      "АЗЕРБАЙДЖАН",
+      "АЛБАНИЯ",
+      "АЛЖИР",
+      "РОССИЯ"
+    ],
+    "isVisible": true
+  },
+  {
+    "name": "f_010",
+    "position": 10,
+    "label": "Адрес",
+    "dataType": "V",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_011",
+    "position": 11,
+    "label": "Рези-дент (да/ нет)",
+    "dataType": "V",
+    "values": ["Да", "Нет"],
+    "isVisible": true
+  },
+  {
+    "name": "f_012",
+    "position": 12,
+    "label": "ЕНВД (да/ нет)",
+    "dataType": "V",
+    "values": ["Да", "Нет"],
+    "isVisible": true
+  },
+  {
+    "name": "f_013",
+    "position": 13,
+    "label": "Скол-ково (да/ нет)",
+    "dataType": "V",
+    "values": ["Да", "Нет"],
+    "isVisible": true
+  },
+  {
+    "name": "f_014",
+    "position": 14,
+    "label": "Особ. экон. зона (да/ нет)",
+    "dataType": "V",
+    "values": ["Да", "Нет"],
+    "isVisible": true
+  },
+  {
+    "name": "f_015",
+    "position": 15,
+    "label": "Дейст-вует с (дата ре-гистра-ции)",
+    "dataType": "D",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_016",
+    "position": 16,
+    "label": "Действу-ет по (дата прекра-щения)",
+    "dataType": "D",
+    "values": [],
+    "isVisible": true
+  },
+  {
+    "name": "f_017",
+    "position": 17,
+    "label": "Флаг подсветки организации (если есть конфликты)",
+    "dataType": "N",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_018",
+    "position": 18,
+    "label": "Отчетная дата прошлой версии",
+    "dataType": "D",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_019",
+    "position": 19,
+    "label": "ЛИД  прошлой версии",
+    "dataType": "V",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_020",
+    "position": 20,
+    "label": "Краткое наименование организации  прошлой версии",
+    "dataType": "V",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_021",
+    "position": 21,
+    "label": "Полное наименование организации прошлой версии",
+    "dataType": "V",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_022",
+    "position": 22,
+    "label": "Ид. орг-ции ПО КС",
+    "dataType": "N",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_023",
+    "position": 23,
+    "label": "Дата начала актуальности по умолчанию (скрытое поле для web)",
+    "dataType": "D",
+    "values": [],
+    "isVisible": false
+  },
+  {
+    "name": "f_024",
+    "position": 24,
+    "label": "Признак наличия история в fact$vzl_org",
+    "dataType": "N",
+    "values": [],
+    "isVisible": false
+  }
+]

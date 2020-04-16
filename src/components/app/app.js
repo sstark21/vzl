@@ -5,7 +5,7 @@ import Table from "../table";
 import "./app.css";
 
 import Grid from "@material-ui/core/Grid";
-import Data from "./table-data.json";
+import Data from "../../data/table-data.json";
 
 import MainFilter from "../main-filter";
 import AdditionalFilter from "../additional-filter";

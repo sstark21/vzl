@@ -1,0 +1,197 @@
+[
+  {
+    "name": "f_001",
+    "position": 1,
+    "label": "Период актуальности",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_002",
+    "position": 2,
+    "label": "Идентификатор организации",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_003",
+    "position": 3,
+    "label": "Полное наименование организации",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_004",
+    "position": 4,
+    "label": "Краткое наименование организации",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_005",
+    "position": 5,
+    "label": "ИНН",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_006",
+    "position": 6,
+    "label": "ОГРН",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_007",
+    "position": 7,
+    "label": "КПП",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_008",
+    "position": 8,
+    "label": "Страна регистрации",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_009",
+    "position": 9,
+    "label": "ЛИД",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_010",
+    "position": 10,
+    "label": "Отчетная дата",
+    "values": [
+      "01.08.2019",
+      "01.04.2019",
+      "01.03.2019",
+      "01.02.2019",
+      "01.01.2019"
+    ],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_011",
+    "position": 11,
+    "label": "Новые за период",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_012",
+    "position": 12,
+    "label": "Изменения за период (организация)",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_013",
+    "position": 13,
+    "label": "Изменения за период (участие)",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_014",
+    "position": 14,
+    "label": "Статус акцепта данных",
+    "values": ["Акцептованные", "Неакцептованные"],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_015",
+    "position": 15,
+    "label": "Наличие конфликтов участия",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_016",
+    "position": 16,
+    "label": "Наличие конфликтов в регистрационных данных",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": "1"
+  },
+  {
+    "name": "f_017",
+    "position": 17,
+    "label": "Прямое участие в капитале организации больше 100%",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_018",
+    "position": 18,
+    "label": "Идентификатор организации",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_019",
+    "position": 19,
+    "label": "ЛИД",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_020",
+    "position": 20,
+    "label": "Отчетная дата",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  },
+  {
+    "name": "f_021",
+    "position": 21,
+    "label": "Несвязные организации",
+    "values": [],
+    "isRequired": false,
+    "isVisible": true,
+    "defaultValue": null
+  }
+]

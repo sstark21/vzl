@@ -31,19 +31,19 @@ export default class MainFilter extends Component {
         contenierField: "",
       },
       {
-        name: "INNumber",
+        name: "INN",
         title: "ИНН",
         checked: false,
         contenierField: "",
       },
       {
-        name: "OGRNumber",
+        name: "OGRN",
         title: "ОГРН",
         checked: false,
         contenierField: "",
       },
       {
-        name: "KPPNumber",
+        name: "KPPN",
         title: "КПП",
         checked: false,
         contenierField: "",
@@ -55,7 +55,7 @@ export default class MainFilter extends Component {
         contenierField: "",
       },
       {
-        name: "LIDNumber",
+        name: "LID",
         title: "ЛИД",
         checked: false,
         contenierField: "",
