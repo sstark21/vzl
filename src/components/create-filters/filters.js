@@ -43,6 +43,7 @@ const PeriodType = ({ element, onToggle }) => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const classes = useStyles();
   const switchId = element.name + "Switch";
+  console.log("PERIOD TYPE", selectedDate)
   return (
     <FormGroup row>
       <form className={classes.date} noValidate autoComplete="off">
@@ -66,7 +67,7 @@ const PeriodType = ({ element, onToggle }) => {
             value={selectedDate}
             InputAdornmentProps={{ position: "start" }}
             onChange={(date) => handleDateChange(date)}
-            disabled={!element.checked}
+            disabled={!element.isRequired}
             noValidate
           />
           <KeyboardDatePicker
@@ -81,7 +82,7 @@ const PeriodType = ({ element, onToggle }) => {
             value={selectedDate}
             InputAdornmentProps={{ position: "start" }}
             onChange={(date) => handleDateChange(date)}
-            disabled={!element.checked}
+            disabled={!element.isRequired}
             noValidate
           />
         </div>
@@ -180,17 +181,17 @@ const InputTextType = ({ element, onToggle, onChangeContent }) => {
             onClick={() => {
               onToggle(element.name);
             }}
-            checked={element.checked}
+            checked={element.isRequired}
           />
           <TextField
             inputProps={{ style: { fontSize: 12 } }}
             InputLabelProps={{ style: { fontSize: 13 } }}
-            label={element.title}
+            label={element.label}
             id={element.name}
             defaultValue=""
             variant="outlined"
             size="small"
-            disabled={!element.checked}
+            disabled={!element.isRequired}
             onChange={onChangeContent}
           />
         </div>

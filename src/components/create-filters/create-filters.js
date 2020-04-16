@@ -8,6 +8,7 @@ import {
 } from "./index";
 
 function CreateFilters({ parameters, onToggle, onChangeContent }) {
+  console.log("PARAMETERS", parameters);
   let item = parameters.map((element) => {
     switch (element.type) {
       case "period":

@@ -4,68 +4,12 @@ import CreateFilter from "../create-filters";
 
 export default class MainFilter extends Component {
   state = {
-    mainParameters: [
-      {
-        name: "actualPeriod",
-        title: "Период актуальности",
-        type: "period",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "idOrganization",
-        title: "Идентификатора Организации",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "fullNameOrganization",
-        title: "Полное наименование организации",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "shortNameOrganization",
-        title: "Краткое наименование организации",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "INN",
-        title: "ИНН",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "OGRN",
-        title: "ОГРН",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "KPPN",
-        title: "КПП",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "registrationCountry",
-        title: "Страна регистрации",
-        checked: false,
-        contenierField: "",
-      },
-      {
-        name: "LID",
-        title: "ЛИД",
-        checked: false,
-        contenierField: "",
-      },
-    ],
+    mainParameters: [],
   };
   onToggle = (arr, idx, param, value) => {
     let oldItem = arr[idx];
     let newItem =
-      param === "checked"
+      param === "isRequired"
         ? { ...oldItem, [param]: !oldItem[param] }
         : { ...oldItem, [param]: value };
     const newArr = [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
@@ -79,7 +23,7 @@ export default class MainFilter extends Component {
     );
     this.setState(({ mainParameters }) => {
       return {
-        mainParameters: this.onToggle(mainParameters, index, "checked"),
+        mainParameters: this.onToggle(mainParameters, index, "isRequired"),
       };
     });
   };
@@ -91,12 +35,7 @@ export default class MainFilter extends Component {
     );
     this.setState(({ mainParameters }) => {
       return {
-        mainParameters: this.onToggle(
-          mainParameters,
-          index,
-          "contenierField",
-          value
-        ),
+        mainParameters: this.onToggle(mainParameters, index, "values", value),
       };
     });
   };
@@ -106,13 +45,19 @@ export default class MainFilter extends Component {
       console.log("test for disabled switch", this.props.disableSwitch);
       let disablSwitchState = this.state.mainParameters.slice();
       disablSwitchState.map((el) => {
-        el.checked = false;
+        el.isRequired = false;
       });
       this.setState({ mainParameters: disablSwitchState });
     }
     if (prevState.mainParameters !== this.state.mainParameters) {
       this.props.updateMainFilter(this.state.mainParameters);
     }
+    if (prevProps.mainFilter !== this.props.mainFilter) {
+      this.setState({mainParameters: this.props.mainFilter})
+    }
+  }
+
+  componentDidMount() {
   }
 
   render() {
