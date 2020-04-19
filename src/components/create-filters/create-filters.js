@@ -7,12 +7,13 @@ import {
   InputTextType,
 } from "./index";
 
-function CreateFilters({ parameters, onToggle, onChangeContent }) {
-  console.log("PARAMETERS", parameters);
+function CreateFilters({ parameters, onToggle, onChangeContent, getDateFrom, getDateTo }) {
   let item = parameters.map((element) => {
     switch (element.type) {
       case "period":
-        return <PeriodType element={element} onToggle={onToggle} />;
+        return (
+          <PeriodType element={element} onToggle={onToggle} getDateFrom={getDateFrom} getDateTo={getDateTo} />
+        );
       case "checkboxOnly":
         return <CheckboxOnlyType element={element} onToggle={onToggle} />;
       case "select":

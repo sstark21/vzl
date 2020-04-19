@@ -53,19 +53,27 @@ export default class MainFilter extends Component {
       this.props.updateMainFilter(this.state.mainParameters);
     }
     if (prevProps.mainFilter !== this.props.mainFilter) {
-      this.setState({mainParameters: this.props.mainFilter})
+      this.setState({ mainParameters: this.props.mainFilter });
     }
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
+  getDateFrom = (date) => {
+    console.log("GET DATE FROM", Date.parse(date));
+  };
+
+  getDateTo = (date) => {
+    console.log("GET DATE TO", Date.parse(date));
+  };
   render() {
     return (
       <CreateFilter
         parameters={this.state.mainParameters}
         onToggle={this.onToggleCheckbox}
         onChangeContent={this.onChangeContentField}
+        getDateFrom={this.getDateFrom}
+        getDateTo={this.getDateTo}
       />
     );
   }

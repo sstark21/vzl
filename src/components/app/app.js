@@ -73,6 +73,7 @@ export default class App extends Component {
     this.setState({ actualMainFilter: newMainParameters });
   }
 
+
   removeAllFilters = () => {
     this.setState({
       disableSwitch: !this.state.disableSwitch,

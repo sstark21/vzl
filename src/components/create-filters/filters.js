@@ -39,11 +39,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PeriodType = ({ element, onToggle }) => {
-  const [selectedDate, handleDateChange] = useState(new Date());
+const PeriodType = ({ element, onToggle, getDateFrom, getDateTo }) => {
+  const [
+    selectedDateFrom,
+    handleDateChangeFrom,
+    selectedDateTo,
+    handleDateChangeTo,
+  ] = useState(new Date());
   const classes = useStyles();
   const switchId = element.name + "Switch";
-  console.log("PERIOD TYPE", selectedDate)
   return (
     <FormGroup row>
       <form className={classes.date} noValidate autoComplete="off">
@@ -53,7 +57,11 @@ const PeriodType = ({ element, onToggle }) => {
             name="checkedB"
             color="primary"
             size="small"
-            onClick={() => onToggle(element.name)}
+            onClick={() => {
+              onToggle(element.name);
+              getDateFrom(selectedDateFrom);
+              getDateTo(selectedDateTo);
+            }}
           />
           <KeyboardDatePicker
             inputProps={{ style: { fontSize: 12 } }}
@@ -64,9 +72,12 @@ const PeriodType = ({ element, onToggle }) => {
             label="с"
             format="dd/MM/yyyy"
             size="small"
-            value={selectedDate}
+            value={selectedDateFrom}
             InputAdornmentProps={{ position: "start" }}
-            onChange={(date) => handleDateChange(date)}
+            onChange={(date) => {
+              handleDateChangeFrom(date);
+              getDateFrom(date);
+            }}
             disabled={!element.isRequired}
             noValidate
           />
@@ -79,9 +90,12 @@ const PeriodType = ({ element, onToggle }) => {
             label="по"
             format="dd/MM/yyyy"
             size="small"
-            value={selectedDate}
+            value={selectedDateTo}
             InputAdornmentProps={{ position: "start" }}
-            onChange={(date) => handleDateChange(date)}
+            onChange={(date) => {
+              handleDateChangeTo(date);
+              getDateTo(date);
+            }}
             disabled={!element.isRequired}
             noValidate
           />
