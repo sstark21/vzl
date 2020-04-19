@@ -10,7 +10,7 @@ import originalData from "../../data/new-table-data.json";
 import MainFilter from "../main-filter";
 import AdditionalFilter from "../additional-filter";
 import ApplyRemoveFilters from "../apply-remove-filters";
-
+import MenuRouter from "../menu-router";
 import allParameters from "../../data/filters-data.json";
 
 export default class App extends Component {
@@ -32,6 +32,7 @@ export default class App extends Component {
   applyFilter = () => {
     const { tableData, actualMainFilter } = this.state;
     const kostilNavigator = {
+      f_001: "f_001",
       f_002: "f_003",
       f_003: "f_005",
       f_004: "f_004",
@@ -46,22 +47,14 @@ export default class App extends Component {
       let onlyCheckedParameters = actualMainFilter.filter(
         (n) => n.isRequired && n.values.length
       );
-      console.log("ACTIVE SWITCHES", onlyCheckedParameters);
       if (onlyCheckedParameters.length) {
-        console.log("IF");
         onlyCheckedParameters.map((el) => {
           newData = newData.filter((item) => {
-            // return item[kostilNavigator[el.name]] == el.values;
-            return (
-              item[kostilNavigator[el.name]]
-                .toLowerCase()
-                .indexOf(el.values.toLowerCase()) > 0
-            );
+            return item[kostilNavigator[el.name]] === el.values;
           });
           this.setState({ tableData: newData });
         });
       } else {
-        console.log("ELSE", tableData);
         this.setState({ tableData: originalData });
       }
     }
@@ -69,10 +62,19 @@ export default class App extends Component {
 
   componentDidMount() {
     let newMainParameters = allParameters.slice(0, 9);
+    let additionalParameters = allParameters.slice(9, 17);
+    additionalParameters = [...additionalParameters, allParameters[20]];
+    console.log("ADDITIOANL", additionalParameters);
     newMainParameters[0].type = "period";
-    this.setState({ actualMainFilter: newMainParameters });
+    additionalParameters.map((el) => (el.type = "checkboxOnly"));
+    additionalParameters[0].type = "period";
+    additionalParameters[4].type = "select";
+    console.log(additionalParameters);
+    this.setState({
+      actualMainFilter: newMainParameters,
+      actualAdditionalFilter: additionalParameters,
+    });
   }
-
 
   removeAllFilters = () => {
     this.setState({
@@ -83,31 +85,41 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="mainDiv container">
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid container spacing={4}>
-            <Grid item xs={6}>
-              <span>Параметры ВЗЛ</span>
-              <MainFilter
-                mainFilter={this.state.actualMainFilter}
-                updateMainFilter={this.updateMainFilter}
-                disableSwitch={this.state.disableSwitch}
+      <div>
+        <div className="headerVTB"></div>
+        <div id="parent">
+          <div className="dummiesMenu">
+            <MenuRouter />
+          </div>
+          <div className="mainDiv container">
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid container spacing={4}>
+                <Grid item xs={6}>
+                  <span>Параметры ВЗЛ</span>
+                  <MainFilter
+                    mainFilter={this.state.actualMainFilter}
+                    updateMainFilter={this.updateMainFilter}
+                    disableSwitch={this.state.disableSwitch}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <span>Дополнительные параметры</span>
+                  <AdditionalFilter
+                    updateAdditionalFilter={this.updateAdditionalFilter}
+                    disableSwitch={this.state.disableSwitch}
+                    additionalParameters={this.state.actualAdditionalFilter}
+                  />
+                </Grid>
+              </Grid>
+              <ApplyRemoveFilters
+               
+                applyFilter={this.applyFilter}
+                removeAllFilters={this.removeAllFilters}
               />
-            </Grid>
-            <Grid item xs={6}>
-              <span>Дополнительные параметры</span>
-              <AdditionalFilter
-                updateAdditionalFilter={this.updateAdditionalFilter}
-                disableSwitch={this.state.disableSwitch}
-              />
-            </Grid>
-          </Grid>
-          <ApplyRemoveFilters
-            applyFilter={this.applyFilter}
-            removeAllFilters={this.removeAllFilters}
-          />
-          <Table data={this.state.tableData} />
-        </MuiPickersUtilsProvider>
+              <Table data={this.state.tableData} />
+            </MuiPickersUtilsProvider>
+          </div>
+        </div>
       </div>
     );
   }

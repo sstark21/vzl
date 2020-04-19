@@ -62,6 +62,7 @@ const PeriodType = ({ element, onToggle, getDateFrom, getDateTo }) => {
               getDateFrom(selectedDateFrom);
               getDateTo(selectedDateTo);
             }}
+            checked={element.isRequired}
           />
           <KeyboardDatePicker
             inputProps={{ style: { fontSize: 12 } }}
@@ -116,12 +117,7 @@ const CheckboxOnlyType = ({ element, onToggle }) => {
             color="primary"
             size="small"
             onClick={() => onToggle(element.name)}
-            checked={element.checked}
-            disabled={
-              element.name == "newForThePeriod" ||
-              element.name == "changeForThePeriodOrganization" ||
-              element.name == "changeForThePeriodParticipation"
-            }
+            checked={element.isRequired}
           />
           <TextField
             inputProps={{ style: { fontSize: 12 } }}
@@ -129,7 +125,7 @@ const CheckboxOnlyType = ({ element, onToggle }) => {
             size="small"
             id="filled-read-only-input"
             label=""
-            defaultValue={element.title}
+            defaultValue={element.label}
             InputProps={{
               readOnly: true,
             }}
@@ -141,7 +137,7 @@ const CheckboxOnlyType = ({ element, onToggle }) => {
   );
 };
 
-const SelectType = ({ element }) => {
+const SelectType = ({ element, onToggle }) => {
   const [choice, setChoice] = useState("");
   const classes = useStyles();
   const handleChange = (event) => {
@@ -155,25 +151,26 @@ const SelectType = ({ element }) => {
             name="checkedB"
             color="primary"
             size="small"
-            onClick={() => {}}
+            onClick={() => onToggle(element.name)}
+            checked={element.isRequired}
           />
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel
               id="demo-simple-select-outlined-label"
               style={{ fontSize: 13 }}
             >
-              {element.title}
+              {element.label}
             </InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
               value={choice}
               onChange={handleChange}
-              label={element.title}
-              disabled
+              label={element.label}
+              disabled={!element.isRequired}
             >
-              <MenuItem value={10}>{element.variants[0].title}</MenuItem>
-              <MenuItem value={15}>{element.variants[1].title}</MenuItem>
+              <MenuItem value={10}>{element.values[0]}</MenuItem>
+              <MenuItem value={15}>{element.values[1]}</MenuItem>
             </Select>
           </FormControl>
         </div>
