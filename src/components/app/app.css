@@ -32,3 +32,7 @@ body {
   width: 250px;
   height: 450px;
 }
+
+.changeLang {
+  float: right;
+}

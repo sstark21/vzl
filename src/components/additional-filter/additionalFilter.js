@@ -18,7 +18,6 @@ export default class AdditionalFilter extends Component {
   };
 
   onToggleCheckbox = (el) => {
-    console.log(el);
     const index = this.state.additionalParameters.findIndex(
       (currentObject) => currentObject.name === el
     );
@@ -33,23 +32,33 @@ export default class AdditionalFilter extends Component {
     });
   };
 
-  componentDidMount() {}
-
   componentDidUpdate(prevProps, prevState) {
     const { additionalParameters } = this.state;
     if (prevProps.disableSwitch !== this.props.disableSwitch) {
-      console.log("test for disabled switch", this.props.disableSwitch);
       let disablSwitchState = additionalParameters.slice();
       disablSwitchState.map((el) => {
         el.isRequired = false;
+        if (el.position === 11 || el.position === 12 || el.position === 13) {
+          el.disabled = true;
+        }
       });
       this.setState({ additionalParameters: disablSwitchState });
     }
+
     if (prevState.additionalParameters !== additionalParameters) {
-      this.props.updateAdditionalFilter(this.state.additionalParameters);
+      this.props.updateAdditionalFilter(additionalParameters);
+      if (
+        !!prevState.additionalParameters[0] &&
+        prevState.additionalParameters[0].isRequired !==
+          additionalParameters[0].isRequired
+      ) {
+        additionalParameters[1].disabled = !additionalParameters[0].isRequired;
+        additionalParameters[2].disabled = !additionalParameters[0].isRequired;
+        additionalParameters[3].disabled = !additionalParameters[0].isRequired;
+      }
     }
+
     if (prevProps.additionalParameters !== this.props.additionalParameters) {
-      console.log("!!!!!!", this.props.additionalParameters);
       this.setState({
         additionalParameters: this.props.additionalParameters,
       });

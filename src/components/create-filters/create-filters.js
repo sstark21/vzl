@@ -14,7 +14,6 @@ function CreateFilters({
   getDateFrom,
   getDateTo,
 }) {
-  console.log(parameters);
   let item = parameters.map((element) => {
     switch (element.type) {
       case "period":

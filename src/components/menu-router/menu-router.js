@@ -23,7 +23,7 @@ export default function MenuListComposition() {
           <MenuItem style={{ height: 60 }}>Управление отчетами</MenuItem>
           <MenuItem style={{ height: 60 }}>Взаимозависимые лица</MenuItem>
           <MenuItem style={{ height: 60 }}>Страновая отчетность</MenuItem>
-          <MenuItem style={{ height: 60 }}>Сверка уведовлений</MenuItem>
+          <MenuItem style={{ height: 60 }}>Сверка уведомлений</MenuItem>
           <MenuItem style={{ height: 60 }}>НСИ</MenuItem>
           <MenuItem style={{ height: 60 }}>Пользователи</MenuItem>
           <MenuItem style={{ height: 60 }}>Аудит</MenuItem>

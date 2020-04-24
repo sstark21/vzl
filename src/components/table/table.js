@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-enterprise";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "ag-grid-enterprise";
-import tableHeader from "../../data/table-header-data.json";
 import DeleteButton from "./delete-button";
-import Button from "@material-ui/core/Button";
-import ExportAndAddButtons from '../export-and-addrow-buttons'
+import ExportAndAddButtons from "../export-and-addrow-buttons";
 
 export default class Table extends Component {
   state = {
@@ -26,11 +23,9 @@ export default class Table extends Component {
     },
   };
 
-  componentDidMount() {
-    console.log("TABLE DID MOUNT");
-    let newTableHeader = tableHeader.slice();
-    newTableHeader = newTableHeader.filter((el) => el.isVisible);
-    newTableHeader.map((element) => {
+  editTableHeader(tableHeader) {
+    tableHeader = tableHeader.filter((el) => el.isVisible);
+    tableHeader.map((element) => {
       element.headerName = element.label;
       element.field = element.name;
       element.cellStyle = { "white-space": "normal" };
@@ -53,8 +48,20 @@ export default class Table extends Component {
       headerName: "Удалить",
       cellRenderer: "deletebutton",
     };
-    newTableHeader = [...newTableHeader, deleteColumn];
-    this.setState({ columnDefs: newTableHeader });
+    tableHeader = [...tableHeader, deleteColumn];
+    this.setState({ columnDefs: tableHeader });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.header !== this.props.header) {
+      let tableHeader = this.props.header.slice();
+      this.editTableHeader(tableHeader);
+    }
+  }
+
+  componentDidMount() {
+    let tableHeader = this.props.header.slice();
+    this.editTableHeader(tableHeader);
   }
 
   onGridReady = (params) => {
@@ -78,7 +85,9 @@ export default class Table extends Component {
           height: 510,
         }}
       >
-        <ExportAndAddButtons onBtnExportDataAsExcel={this.onBtnExportDataAsExcel} />
+        <ExportAndAddButtons
+          onBtnExportDataAsExcel={this.onBtnExportDataAsExcel}
+        />
         <AgGridReact
           columnDefs={this.state.columnDefs}
           rowData={this.props.data}

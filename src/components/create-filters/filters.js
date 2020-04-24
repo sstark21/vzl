@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       width: 172,
-      height: 27,
+      height: 45,
     },
   },
   checkbox: {
@@ -40,14 +40,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PeriodType = ({ element, onToggle, getDateFrom, getDateTo }) => {
-  const [
-    selectedDateFrom,
-    handleDateChangeFrom,
-    selectedDateTo,
-    handleDateChangeTo,
-  ] = useState(new Date());
+  const [selectedDateFrom, handleDateChangeFrom] = useState(new Date());
+  const [selectedDateTo, handleDateChangeTo] = useState(new Date());
   const classes = useStyles();
   const switchId = element.name + "Switch";
+
   return (
     <FormGroup row>
       <form className={classes.date} noValidate autoComplete="off">
@@ -58,9 +55,7 @@ const PeriodType = ({ element, onToggle, getDateFrom, getDateTo }) => {
             color="primary"
             size="small"
             onClick={() => {
-              onToggle(element.name);
-              getDateFrom(selectedDateFrom);
-              getDateTo(selectedDateTo);
+              onToggle(element.name, selectedDateFrom, selectedDateTo);
             }}
             checked={element.isRequired}
           />
@@ -74,6 +69,7 @@ const PeriodType = ({ element, onToggle, getDateFrom, getDateTo }) => {
             format="dd/MM/yyyy"
             size="small"
             value={selectedDateFrom}
+            helperText={element.label}
             InputAdornmentProps={{ position: "start" }}
             onChange={(date) => {
               handleDateChangeFrom(date);
@@ -118,14 +114,14 @@ const CheckboxOnlyType = ({ element, onToggle }) => {
             size="small"
             onClick={() => onToggle(element.name)}
             checked={element.isRequired}
+            disabled={element.disabled}
           />
           <TextField
             inputProps={{ style: { fontSize: 12 } }}
             InputLabelProps={{ style: { fontSize: 13 } }}
             size="small"
             id="filled-read-only-input"
-            label=""
-            defaultValue={element.label}
+            value={element.label}
             InputProps={{
               readOnly: true,
             }}

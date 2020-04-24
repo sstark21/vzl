@@ -1,0 +1,198 @@
+[
+    {
+      "name": "f_001",
+      "position": 1,
+      "label": "Period of validity",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_002",
+      "position": 2,
+      "label": "Code of Subsidiary",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_003",
+      "position": 3,
+      "label": "Full name of Subsidiary",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_004",
+      "position": 4,
+      "label": "Short name of Subsidiary",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_005",
+      "position": 5,
+      "label": "TIN",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_006",
+      "position": 6,
+      "label": "PSRN",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_007",
+      "position": 7,
+      "label": "TRRC",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_008",
+      "position": 8,
+      "label": "Country of registration",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_009",
+      "position": 9,
+      "label": "LDS",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_010",
+      "position": 10,
+      "label": "Report date",
+      "values": [
+        "01.08.2019",
+        "01.04.2019",
+        "01.03.2019",
+        "01.02.2019",
+        "01.01.2019"
+      ],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_011",
+      "position": 11,
+      "label": "New within period",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_012",
+      "position": 12,
+      "label": "Changed within period (Subsidiary)",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_013",
+      "position": 13,
+      "label": "Changed within period (Participation)",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_014",
+      "position": 14,
+      "label": "Data accept status",
+      "values": ["Акцептованные", "Неакцептованные"],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_015",
+      "position": 15,
+      "label": "Conflicts in shares",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_016",
+      "position": 16,
+      "label": "Conflicts in registration data",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": "1"
+    },
+    {
+      "name": "f_017",
+      "position": 17,
+      "label": "Share of capital is over 100%",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_018",
+      "position": 18,
+      "label": "Code of Subsidiary",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_019",
+      "position": 19,
+      "label": "LDS",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_020",
+      "position": 20,
+      "label": "Report date",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    },
+    {
+      "name": "f_021",
+      "position": 21,
+      "label": "Non-related organizations",
+      "values": [],
+      "isRequired": false,
+      "isVisible": true,
+      "defaultValue": null
+    }
+  ]
+  

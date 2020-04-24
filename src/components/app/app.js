@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Table from "../table";
+import Switch from "@material-ui/core/Switch";
 import "./app.css";
 
 import Grid from "@material-ui/core/Grid";
-import originalData from "../../data/new-table-data.json";
+import originalData from "../../data/table-data.json";
+import originalDataEn from "../../data/en-table-data.json";
+import allParameters from "../../data/filters-data.json";
+import allParametersEn from "../../data/en-filters-data.json";
+import tableHeader from "../../data/table-header.json";
+import tableHeaderEn from "../../data/en-table-header.json";
 
 import MainFilter from "../main-filter";
 import AdditionalFilter from "../additional-filter";
 import ApplyRemoveFilters from "../apply-remove-filters";
 import MenuRouter from "../menu-router";
-import allParameters from "../../data/filters-data.json";
 
 export default class App extends Component {
   state = {
@@ -19,6 +25,9 @@ export default class App extends Component {
     actualMainFilter: null,
     actualAdditionalFilter: null,
     disableSwitch: false,
+    lang: "ru",
+    parameters: allParameters,
+    tableHeader: tableHeader,
   };
 
   updateMainFilter = (updateData) => {
@@ -50,7 +59,11 @@ export default class App extends Component {
       if (onlyCheckedParameters.length) {
         onlyCheckedParameters.map((el) => {
           newData = newData.filter((item) => {
-            return item[kostilNavigator[el.name]] === el.values;
+            return isFinite(item[kostilNavigator[el.name]])
+              ? item[kostilNavigator[el.name]] === el.values
+              : item[kostilNavigator[el.name]]
+                  .toUpperCase()
+                  .indexOf(el.values.toUpperCase()) >= 0;
           });
           this.setState({ tableData: newData });
         });
@@ -60,21 +73,56 @@ export default class App extends Component {
     }
   };
 
-  componentDidMount() {
-    let newMainParameters = allParameters.slice(0, 9);
-    let additionalParameters = allParameters.slice(9, 17);
-    additionalParameters = [...additionalParameters, allParameters[20]];
-    console.log("ADDITIOANL", additionalParameters);
+  editFilters = (parameters) => {
+    let newMainParameters = parameters.slice(0, 9);
+    let additionalParameters = parameters.slice(9, 17);
+    additionalParameters = [...additionalParameters, parameters[20]];
     newMainParameters[0].type = "period";
     additionalParameters.map((el) => (el.type = "checkboxOnly"));
     additionalParameters[0].type = "period";
+    additionalParameters[1].disabled = true;
+    additionalParameters[2].disabled = true;
+    additionalParameters[3].disabled = true;
     additionalParameters[4].type = "select";
-    console.log(additionalParameters);
     this.setState({
       actualMainFilter: newMainParameters,
       actualAdditionalFilter: additionalParameters,
     });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.lang !== this.state.lang) {
+      if (this.state.lang === "en") {
+        this.editFilters(allParametersEn);
+        this.setState({
+          tableData: originalDataEn,
+          parameters: allParametersEn,
+          tableHeader: tableHeaderEn,
+        });
+      } else {
+        this.editFilters(allParameters);
+        this.setState({
+          tableData: originalData,
+          parameters: allParameters,
+          tableHeader: tableHeader,
+        });
+      }
+      console.log("CHANGE LANG STATE HERE", prevState.lang, this.state.lang);
+    }
   }
+
+  componentDidMount() {
+    const { parameters } = this.state;
+    this.editFilters(parameters);
+  }
+
+  changeLang = (lang) => {
+    console.log("CLICK SUKA", lang);
+
+    lang === "ru"
+      ? this.setState({ lang: "en" })
+      : this.setState({ lang: "ru" });
+  };
 
   removeAllFilters = () => {
     this.setState({
@@ -91,6 +139,16 @@ export default class App extends Component {
           <div className="dummiesMenu">
             <MenuRouter />
           </div>
+          <FormControlLabel
+            control={
+              <Switch
+                color="primary"
+                onClick={() => this.changeLang(this.state.lang)}
+              />
+            }
+            className="changeLang"
+            label={this.state.lang}
+          />
           <div className="mainDiv container">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid container spacing={4}>
@@ -112,11 +170,13 @@ export default class App extends Component {
                 </Grid>
               </Grid>
               <ApplyRemoveFilters
-               
                 applyFilter={this.applyFilter}
                 removeAllFilters={this.removeAllFilters}
               />
-              <Table data={this.state.tableData} />
+              <Table
+                data={this.state.tableData}
+                header={this.state.tableHeader}
+              />
             </MuiPickersUtilsProvider>
           </div>
         </div>

@@ -17,10 +17,21 @@ export default class MainFilter extends Component {
     return newArr;
   };
 
-  onToggleCheckbox = (el) => {
+  onToggleCheckbox = (el, dateFrom, dateTo) => {
+    console.log(dateFrom, dateTo);
     const index = this.state.mainParameters.findIndex(
       (currentObject) => currentObject.name === el
     );
+    if (!!dateFrom && !!dateTo) {
+      this.setState(({ mainParameters }) => {
+        return {
+          mainParameters: this.onToggle(mainParameters, 0, "values", [
+            Date.parse(dateFrom),
+            Date.parse(dateTo),
+          ]),
+        };
+      });
+    }
     this.setState(({ mainParameters }) => {
       return {
         mainParameters: this.onToggle(mainParameters, index, "isRequired"),
@@ -60,13 +71,21 @@ export default class MainFilter extends Component {
   componentDidMount() {}
 
   getDateFrom = (date) => {
-    console.log("GET DATE FROM", Date.parse(date));
+    const dateFrom = Date.parse(date);
+    let newArr = this.state.mainParameters.slice();
+    newArr[0].values[0] = dateFrom;
+
+    this.setState({ mainParameters: newArr });
   };
 
   getDateTo = (date) => {
-    console.log("GET DATE TO", Date.parse(date));
+    const dateTo = Date.parse(date);
+    let newArr = this.state.mainParameters.slice();
+    newArr[0].values[1] = dateTo;
+    this.setState({ mainParameters: newArr });
   };
   render() {
+    console.log("FINAL STATE", this.state.mainParameters);
     return (
       <CreateFilter
         parameters={this.state.mainParameters}
