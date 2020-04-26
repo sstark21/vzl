@@ -65,13 +65,9 @@ export default class AdditionalFilter extends Component {
     }
   }
 
-  getDateFrom = (date) => {
-    console.log("GET DATE FROM", Date.parse(date));
-  };
+  getDateFrom = (date) => {};
 
-  getDateTo = (date) => {
-    console.log("GET DATE TO", Date.parse(date));
-  };
+  getDateTo = (date) => {};
 
   render() {
     return (

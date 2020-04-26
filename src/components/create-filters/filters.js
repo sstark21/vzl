@@ -9,19 +9,20 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { LangConsumer } from "../language-context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: 360,
+      width: 735,
       height: 27,
     },
   },
   date: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: 172,
+      width: 360,
       height: 45,
     },
   },
@@ -46,59 +47,65 @@ const PeriodType = ({ element, onToggle, getDateFrom, getDateTo }) => {
   const switchId = element.name + "Switch";
 
   return (
-    <FormGroup row>
-      <form className={classes.date} noValidate autoComplete="off">
-        <div>
-          <Switch
-            id={switchId}
-            name="checkedB"
-            color="primary"
-            size="small"
-            onClick={() => {
-              onToggle(element.name, selectedDateFrom, selectedDateTo);
-            }}
-            checked={element.isRequired}
-          />
-          <KeyboardDatePicker
-            inputProps={{ style: { fontSize: 12 } }}
-            InputLabelProps={{ style: { fontSize: 17 } }}
-            autoOk
-            variant="inline"
-            inputVariant="outlined"
-            label="с"
-            format="dd/MM/yyyy"
-            size="small"
-            value={selectedDateFrom}
-            helperText={element.label}
-            InputAdornmentProps={{ position: "start" }}
-            onChange={(date) => {
-              handleDateChangeFrom(date);
-              getDateFrom(date);
-            }}
-            disabled={!element.isRequired}
-            noValidate
-          />
-          <KeyboardDatePicker
-            inputProps={{ style: { fontSize: 12 } }}
-            InputLabelProps={{ style: { fontSize: 17 } }}
-            autoOk
-            variant="inline"
-            inputVariant="outlined"
-            label="по"
-            format="dd/MM/yyyy"
-            size="small"
-            value={selectedDateTo}
-            InputAdornmentProps={{ position: "start" }}
-            onChange={(date) => {
-              handleDateChangeTo(date);
-              getDateTo(date);
-            }}
-            disabled={!element.isRequired}
-            noValidate
-          />
-        </div>
-      </form>
-    </FormGroup>
+    <LangConsumer>
+      {({ dateTo, dateFrom }) => {
+        return (
+          <FormGroup row>
+            <form className={classes.date} noValidate autoComplete="off">
+              <div>
+                <Switch
+                  id={switchId}
+                  name="checkedB"
+                  color="primary"
+                  size="small"
+                  onClick={() => {
+                    onToggle(element.name, selectedDateFrom, selectedDateTo);
+                  }}
+                  checked={element.isRequired}
+                />
+                <KeyboardDatePicker
+                  inputProps={{ style: { fontSize: 12 } }}
+                  InputLabelProps={{ style: { fontSize: 17 } }}
+                  autoOk
+                  variant="inline"
+                  inputVariant="outlined"
+                  label={dateFrom}
+                  format="dd/MM/yyyy"
+                  size="small"
+                  value={selectedDateFrom}
+                  helperText={element.label}
+                  InputAdornmentProps={{ position: "start" }}
+                  onChange={(date) => {
+                    handleDateChangeFrom(date);
+                    getDateFrom(date);
+                  }}
+                  disabled={!element.isRequired}
+                  noValidate
+                />
+                <KeyboardDatePicker
+                  inputProps={{ style: { fontSize: 12 } }}
+                  InputLabelProps={{ style: { fontSize: 17 } }}
+                  autoOk
+                  variant="inline"
+                  inputVariant="outlined"
+                  label={dateTo}
+                  format="dd/MM/yyyy"
+                  size="small"
+                  value={selectedDateTo}
+                  InputAdornmentProps={{ position: "start" }}
+                  onChange={(date) => {
+                    handleDateChangeTo(date);
+                    getDateTo(date);
+                  }}
+                  disabled={!element.isRequired}
+                  noValidate
+                />
+              </div>
+            </form>
+          </FormGroup>
+        );
+      }}
+    </LangConsumer>
   );
 };
 

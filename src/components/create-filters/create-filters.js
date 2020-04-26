@@ -19,6 +19,7 @@ function CreateFilters({
       case "period":
         return (
           <PeriodType
+            key={element.label}
             element={element}
             onToggle={onToggle}
             getDateFrom={getDateFrom}
@@ -26,12 +27,25 @@ function CreateFilters({
           />
         );
       case "checkboxOnly":
-        return <CheckboxOnlyType element={element} onToggle={onToggle} />;
+        return (
+          <CheckboxOnlyType
+            key={element.label}
+            element={element}
+            onToggle={onToggle}
+          />
+        );
       case "select":
-        return <SelectType element={element} onToggle={onToggle} />;
+        return (
+          <SelectType
+            key={element.label}
+            element={element}
+            onToggle={onToggle}
+          />
+        );
       default:
         return (
           <InputTextType
+            key={element.label}
             element={element}
             onToggle={onToggle}
             onChangeContent={onChangeContent}

@@ -18,7 +18,6 @@ export default class MainFilter extends Component {
   };
 
   onToggleCheckbox = (el, dateFrom, dateTo) => {
-    console.log(dateFrom, dateTo);
     const index = this.state.mainParameters.findIndex(
       (currentObject) => currentObject.name === el
     );
@@ -53,7 +52,6 @@ export default class MainFilter extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.disableSwitch !== this.props.disableSwitch) {
-      console.log("test for disabled switch", this.props.disableSwitch);
       let disablSwitchState = this.state.mainParameters.slice();
       disablSwitchState.map((el) => {
         el.isRequired = false;
@@ -85,7 +83,6 @@ export default class MainFilter extends Component {
     this.setState({ mainParameters: newArr });
   };
   render() {
-    console.log("FINAL STATE", this.state.mainParameters);
     return (
       <CreateFilter
         parameters={this.state.mainParameters}

@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
+import { LangConsumer } from "../language-context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,16 +20,31 @@ export default function MenuListComposition() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <MenuList>
-          <MenuItem style={{ height: 60 }}>Управление отчетами</MenuItem>
-          <MenuItem style={{ height: 60 }}>Взаимозависимые лица</MenuItem>
-          <MenuItem style={{ height: 60 }}>Страновая отчетность</MenuItem>
-          <MenuItem style={{ height: 60 }}>Сверка уведомлений</MenuItem>
-          <MenuItem style={{ height: 60 }}>НСИ</MenuItem>
-          <MenuItem style={{ height: 60 }}>Пользователи</MenuItem>
-          <MenuItem style={{ height: 60 }}>Аудит</MenuItem>
-          <MenuItem style={{ height: 60 }}>Помощь</MenuItem>
-        </MenuList>
+        <LangConsumer>
+          {({
+            reportManagment,
+            RPR,
+            countryReport,
+            noticeVerification,
+            referencedData,
+            users,
+            audit,
+            helpAndSupport,
+          }) => {
+            return (
+              <MenuList>
+                <MenuItem style={{ height: 60 }}>{reportManagment}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{RPR}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{countryReport}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{noticeVerification}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{referencedData}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{users}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{audit}</MenuItem>
+                <MenuItem style={{ height: 60 }}>{helpAndSupport}</MenuItem>
+              </MenuList>
+            );
+          }}
+        </LangConsumer>
       </Paper>
     </div>
   );

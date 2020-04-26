@@ -5,8 +5,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Table from "../table";
 import Switch from "@material-ui/core/Switch";
 import "./app.css";
-
+import { ru, en } from "../language";
 import Grid from "@material-ui/core/Grid";
+
 import originalData from "../../data/table-data.json";
 import originalDataEn from "../../data/en-table-data.json";
 import allParameters from "../../data/filters-data.json";
@@ -14,6 +15,7 @@ import allParametersEn from "../../data/en-filters-data.json";
 import tableHeader from "../../data/table-header.json";
 import tableHeaderEn from "../../data/en-table-header.json";
 
+import { LangProvider, LangConsumer } from "../language-context";
 import MainFilter from "../main-filter";
 import AdditionalFilter from "../additional-filter";
 import ApplyRemoveFilters from "../apply-remove-filters";
@@ -26,6 +28,7 @@ export default class App extends Component {
     actualAdditionalFilter: null,
     disableSwitch: false,
     lang: "ru",
+    currentLang: ru,
     parameters: allParameters,
     tableHeader: tableHeader,
   };
@@ -59,6 +62,15 @@ export default class App extends Component {
       if (onlyCheckedParameters.length) {
         onlyCheckedParameters.map((el) => {
           newData = newData.filter((item) => {
+            if (el.name === "f_001") {
+              const dateArrFrom = item.f_015.split(".");
+              const dateArrTo = item.f_016.split(".");
+              const dateTo =
+                dateArrTo[2] + "-" + dateArrTo[1] + "-" + dateArrTo[0];
+              const dateFrom =
+                dateArrFrom[2] + "-" + dateArrFrom[1] + "-" + dateArrFrom[0];
+              return 1;
+            }
             return isFinite(item[kostilNavigator[el.name]])
               ? item[kostilNavigator[el.name]] === el.values
               : item[kostilNavigator[el.name]]
@@ -98,6 +110,7 @@ export default class App extends Component {
           tableData: originalDataEn,
           parameters: allParametersEn,
           tableHeader: tableHeaderEn,
+          currentLang: en,
         });
       } else {
         this.editFilters(allParameters);
@@ -105,9 +118,9 @@ export default class App extends Component {
           tableData: originalData,
           parameters: allParameters,
           tableHeader: tableHeader,
+          currentLang: ru,
         });
       }
-      console.log("CHANGE LANG STATE HERE", prevState.lang, this.state.lang);
     }
   }
 
@@ -117,8 +130,6 @@ export default class App extends Component {
   }
 
   changeLang = (lang) => {
-    console.log("CLICK SUKA", lang);
-
     lang === "ru"
       ? this.setState({ lang: "en" })
       : this.setState({ lang: "ru" });
@@ -136,49 +147,60 @@ export default class App extends Component {
       <div>
         <div className="headerVTB"></div>
         <div id="parent">
-          <div className="dummiesMenu">
-            <MenuRouter />
-          </div>
-          <FormControlLabel
-            control={
-              <Switch
-                color="primary"
-                onClick={() => this.changeLang(this.state.lang)}
-              />
-            }
-            className="changeLang"
-            label={this.state.lang}
-          />
-          <div className="mainDiv container">
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container spacing={4}>
-                <Grid item xs={6}>
-                  <span>Параметры ВЗЛ</span>
-                  <MainFilter
-                    mainFilter={this.state.actualMainFilter}
-                    updateMainFilter={this.updateMainFilter}
-                    disableSwitch={this.state.disableSwitch}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <span>Дополнительные параметры</span>
-                  <AdditionalFilter
-                    updateAdditionalFilter={this.updateAdditionalFilter}
-                    disableSwitch={this.state.disableSwitch}
-                    additionalParameters={this.state.actualAdditionalFilter}
-                  />
-                </Grid>
-              </Grid>
-              <ApplyRemoveFilters
-                applyFilter={this.applyFilter}
-                removeAllFilters={this.removeAllFilters}
-              />
-              <Table
-                data={this.state.tableData}
-                header={this.state.tableHeader}
-              />
-            </MuiPickersUtilsProvider>
-          </div>
+          <LangProvider value={this.state.currentLang}>
+            <div className="dummiesMenu">
+              <MenuRouter />
+            </div>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  onClick={() => this.changeLang(this.state.lang)}
+                />
+              }
+              className="changeLang"
+              label={this.state.lang}
+            />
+            <div className="mainDiv container">
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <LangConsumer>
+                  {(value) => {
+                    return (
+                      <Grid container spacing={4}>
+                        <Grid item xs={12}>
+                          <span>{value.filtersVZL}</span>
+                          <MainFilter
+                            mainFilter={this.state.actualMainFilter}
+                            updateMainFilter={this.updateMainFilter}
+                            disableSwitch={this.state.disableSwitch}
+                          />
+                        </Grid>
+                        {/* <Grid item xs={6}>
+                          <span>{value.additionalFilters}</span>
+                          <AdditionalFilter
+                            updateAdditionalFilter={this.updateAdditionalFilter}
+                            disableSwitch={this.state.disableSwitch}
+                            additionalParameters={
+                              this.state.actualAdditionalFilter
+                            }
+                          />
+                        </Grid> */}
+                      </Grid>
+                    );
+                  }}
+                </LangConsumer>
+
+                <ApplyRemoveFilters
+                  applyFilter={this.applyFilter}
+                  removeAllFilters={this.removeAllFilters}
+                />
+                <Table
+                  data={this.state.tableData}
+                  header={this.state.tableHeader}
+                />
+              </MuiPickersUtilsProvider>
+            </div>
+          </LangProvider>
         </div>
       </div>
     );

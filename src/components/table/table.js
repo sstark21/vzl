@@ -45,7 +45,7 @@ export default class Table extends Component {
       }
     });
     const deleteColumn = {
-      headerName: "Удалить",
+      headerName: tableHeader[0].label === "Report date" ? "Delete" : "Удалить",
       cellRenderer: "deletebutton",
     };
     tableHeader = [...tableHeader, deleteColumn];
@@ -71,7 +71,6 @@ export default class Table extends Component {
 
   onBtnExportDataAsExcel = () => {
     let params = {};
-    console.log(params);
     this.gridApi.exportDataAsExcel(params);
   };
 
@@ -82,7 +81,7 @@ export default class Table extends Component {
         id="myGrid"
         style={{
           marginTop: 20,
-          height: 510,
+          height: 500,
         }}
       >
         <ExportAndAddButtons
